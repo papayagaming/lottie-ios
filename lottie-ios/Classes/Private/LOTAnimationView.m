@@ -41,7 +41,14 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 + (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON {
-    return [self animationFromJSON:animationJSON inBundle:[NSBundle mainBundle]];
+    
+    NSBundle *papayaKitBundle = [NSBundle bundleWithIdentifier:@"com.papayagaming.PapayaKit"];
+    
+    NSString *resourcesBundlePath =
+    [papayaKitBundle pathForResource:@"CoinAnimation"
+                              ofType:@"bundle"];
+    NSBundle *resourcesBundle = [NSBundle bundleWithPath:resourcesBundlePath];
+    return [self animationFromJSON:animationJSON inBundle:resourcesBundle];
 }
 
 + (nonnull instancetype)animationFromJSON:(nullable NSDictionary *)animationJSON inBundle:(nullable NSBundle *)bundle {
